@@ -9,7 +9,7 @@
     },
     "api": {
       "type": "openapi",
-      "url": "http://localhost:5003/openapi.yaml",
+      "url": "http://3.10.55.5:5003/openapi.yaml",
       "is_user_authenticated": false
     },
     "logo_url": "https://dod.com.tr/_nuxt/img/dod-logo.176c438.png",
