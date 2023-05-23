@@ -1,0 +1,220 @@
+openapi: 3.0.1
+info:
+  title: Find Cars API
+  description: A plugin that allows the user to find cars from DOD API.
+  version: 'v1'
+servers:
+  - url: http://localhost:5003
+paths:
+  /todos/{username:
+    get:
+      operationId: getTodos
+      summary: Get the list of todos
+      parameters:
+      - in: path
+        name: username
+        schema:
+            type: string
+        required: true
+        description: The name of the user.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getTodosResponse'
+    post:
+      operationId: addTodo
+      summary: Add a todo to the list
+      parameters:
+      - in: path
+        name: username
+        schema:
+            type: string
+        required: true
+        description: The name of the user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/addTodoRequest'
+      responses:
+        "200":
+          description: OK
+    delete:
+      operationId: deleteTodo
+      summary: Delete a todo from the list
+      parameters:
+      - in: path
+        name: username
+        schema:
+            type: string
+        required: true
+        description: The name of the user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/deleteTodoRequest'
+      responses:
+        "200":
+          description: OK
+  /cars/find:
+    post:
+      operationId: findCars
+      summary: Find cars from DOD API
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/findCarsRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findCarsResponse'
+
+  /cars/ekspertiz:
+    post:
+      operationId: carEkspertiz
+      summary: Find car ekspertiz report
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/findCarsRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findCarsResponse'
+      
+
+components:
+  schemas:
+    getTodosResponse:
+      type: object
+      properties:
+        todos:
+          type: array
+          items:
+            type: string
+          description: The list of todos.
+    addTodoRequest:
+      type: object
+      required:
+      - todo
+      properties:
+        todo:
+          type: string
+          description: The todo to add to the list.
+          required: true
+    deleteTodoRequest:
+      type: object
+      required:
+      - todo_idx
+      properties:
+        todo_idx:
+          type: number
+          description: The index of the todo to delete.
+          required: true
+    findCarsRequest:
+        type: object
+        properties:
+          categoryIds:
+            type: array
+            description: The category of the car to find. If not specified, all categories will be searched. There are 3 categories, 2, 3, and 4. 2 is "otomobil", 3 is "Arazi & Suv & Pick-up", and 4 is "Hafif ticari araçlar". Don't forget to put the category id in an array. Choose one depending on the car user wants to find.
+            required: true
+            items:
+              type: number
+          brands:
+            type: array
+            description: The brand of the car to find. If not specified, all brands will be searched. 27 is Audi, 28 is Bmw, 30 is Chevrolet, 2 is Citroen, 133 is Cupra, 3 is Dacia, 115 is Ds, 6 is Fiat, 7 is Ford, 32 is Honda, 8 is Hyundai, 46 is Jaguar, 34 is Jeep, 11 is Kia, 36 is Land rover, 61 is Lexus, 48 is Maserati, 12 is Mazda, 13 is Mercedes, 126 is Mercedes-benz, 50 is Mini, 14 is Mitsubishi, 15 is Nissan, 16 is Opel, 17 is Peugeot, 51 is Porsche, 18 is Renault, 19 is Seat, 20 is Skoda, 40 is Subaru, 24 is Toyota, 25 is Volkswagen, 41 is Volvo
+            required: true
+            items:
+              type: number
+              enum: [1, 7, 12, 19, 21, 23, 24, 33, 38, 41, 50, 53, 61, 63, 68, 70, 76, 81, 84, 85, 87, 89, 93, 97, 99, 106, 108, 111, 117, 120, 121]
+          models:
+            type: array
+            description: The model of the car to find. If not specified, all models will be searched. Default value is always [0].
+            required: true
+            items:
+              type: number
+          fuelTypes:
+            type: array
+            description: empty array
+            required: true
+            items:
+              type: number
+          gearTypes:
+            type: array
+            description: empty array
+            required: true
+            items:
+              type: number
+          # year:
+          #   type: object
+          #   description: The year of the car to find. If not specified, all years will be searched, values are 0.
+          #   required: true
+          #   properties:
+          #     minYear:
+          #       type: number
+          #       description: The minimum year of the car to find.
+          #       required: true
+          #     maxYear:
+          #       type: number
+          #       description: The maximum year of the car to find.
+          #       required: true
+          # price:
+          #   type: object
+          #   description: The price of the car to find. If not specified, all prices will be searched, values are 0.
+          #   required: true
+          #   properties:
+          #     minPrice:
+          #       type: number
+          #       description: The minimum price of the car to find.
+          #       required: true
+          #     maxPrice:
+          #       type: number
+          #       description: The maximum price of the car to find.
+          #       required: true
+          # km:
+          #   type: object
+          #   description: The km of the car to find. If not specified, all kms will be searched, values are 0.
+          #   required: true
+          #   properties:
+          #     minKm:
+          #       type: number
+          #       description: The minimum km of the car to find.
+          #       required: true
+          #     maxKm:
+          #       type: number
+          #       description: The maximum km of the car to find.
+          #       required: true
+          fileNumber:
+            type: string
+            description: The file number of the car to find. If not specified, keep it empty, all file numbers will be searched.
+            required: true
+          pagination:
+            type: object
+            properties:
+              page:
+                type: number
+              pageSize:
+                type: number
+          cityCodes:
+            type: array
+            description: Turkish city codes of the car to find. If not specified, keep it empty, all cities will be searched. 1 is "Adana", 6 is "Ankara", 34 is "Istanbul", 35 is "Izmir". 
+            required: true
+            items:
+              type: number
+              enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81]

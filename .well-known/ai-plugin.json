@@ -1,0 +1,19 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "DOD Car Search",
+    "name_for_model": "dod",
+    "description_for_human": "Plugin for finding a car on the DOD website.",
+    "description_for_model": "Plugin for finding a car on the DOD website.",
+    "auth": {
+      "type": "none"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "http://localhost:5003/openapi.yaml",
+      "is_user_authenticated": false
+    },
+    "logo_url": "https://dod.com.tr/_nuxt/img/dod-logo.176c438.png",
+    "contact_email": "legal@example.com",
+    "legal_info_url": "http://example.com/legal"
+  }
+  
