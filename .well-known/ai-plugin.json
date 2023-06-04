@@ -9,7 +9,7 @@
     },
     "api": {
       "type": "openapi",
-      "url": "https://dod-chatbot.vercel.app/openapi.yaml",
+      "url": "https://dod-chatbot.onrender.com/openapi.yaml",
       "is_user_authenticated": false
     },
     "logo_url": "https://dod.com.tr/_nuxt/img/dod-logo.176c438.png",

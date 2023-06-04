@@ -4,7 +4,7 @@ info:
   description: A plugin that allows the user to find cars from DOD API.
   version: 'v1'
 servers:
-  - url: https://dod-chatbot.vercel.app
+  - url: https://dod-chatbot.onrender.com
 paths:
   /todos/{username:
     get:
