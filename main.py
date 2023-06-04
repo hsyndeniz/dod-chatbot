@@ -4,7 +4,7 @@ import quart
 import quart_cors
 from quart import request
 
-app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
+app = quart_cors.cors(quart.Quart(__name__), allow_origin="*")
 
 # Keep track of todo's. Does not persist if Python session is restarted.
 _TODOS = {}
@@ -13,6 +13,8 @@ _TODOS = {}
 async def find_cars():
     body = await quart.request.get_data()
     body = json.loads(body)
+    # print to console
+    # print(body)
     conn = http.client.HTTPSConnection("gw.dod.com.tr")
     payload = json.dumps({
         "categoryIds": body["categoryIds"] if "categoryIds" in body else [2],
@@ -66,6 +68,7 @@ async def find_cars():
     conn.request("POST", "/gw-search/SearchByFieldDodCarDetailIndex", payload, headers)
     res = conn.getresponse()
     data = res.read()
+    print(data.decode("utf-8"))
     return data.decode("utf-8")
 
 @app.post("/todos/<string:username>")

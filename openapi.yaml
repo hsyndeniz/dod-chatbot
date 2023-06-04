@@ -4,7 +4,7 @@ info:
   description: A plugin that allows the user to find cars from DOD API.
   version: 'v1'
 servers:
-  - url: http://3.10.55.5:5003
+  - url: http://localhost:5003
 paths:
   /todos/{username:
     get:
@@ -79,25 +79,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/findCarsResponse'
-
-  /cars/ekspertiz:
-    post:
-      operationId: carEkspertiz
-      summary: Find car ekspertiz report
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/findCarsRequest'
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/findCarsResponse'
-      
 
 components:
   schemas:
