@@ -72,42 +72,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/findCarsRequest'
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/findCarsResponse'
 
 components:
   schemas:
-    getTodosResponse:
-      type: object
-      properties:
-        todos:
-          type: array
-          items:
-            type: string
-          description: The list of todos.
-    addTodoRequest:
-      type: object
-      required:
-      - todo
-      properties:
-        todo:
-          type: string
-          description: The todo to add to the list.
-          required: true
-    deleteTodoRequest:
-      type: object
-      required:
-      - todo_idx
-      properties:
-        todo_idx:
-          type: number
-          description: The index of the todo to delete.
-          required: true
     findCarsRequest:
         type: object
         properties:
